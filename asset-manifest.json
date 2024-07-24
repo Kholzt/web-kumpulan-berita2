@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/web-kumpulan-berita/static/css/main.0e965c4b.css",
-    "main.js": "/web-kumpulan-berita/static/js/main.51dd25d1.js",
-    "static/media/bg.png": "/web-kumpulan-berita/static/media/bg.1c8ab1f321be67d17836.png",
-    "index.html": "/web-kumpulan-berita/index.html",
-    "main.0e965c4b.css.map": "/web-kumpulan-berita/static/css/main.0e965c4b.css.map",
-    "main.51dd25d1.js.map": "/web-kumpulan-berita/static/js/main.51dd25d1.js.map"
+    "main.css": "/static/css/main.3bbef221.css",
+    "main.js": "/static/js/main.51dd25d1.js",
+    "static/media/bg.png": "/static/media/bg.1c8ab1f321be67d17836.png",
+    "index.html": "/index.html",
+    "main.3bbef221.css.map": "/static/css/main.3bbef221.css.map",
+    "main.51dd25d1.js.map": "/static/js/main.51dd25d1.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e965c4b.css",
+    "static/css/main.3bbef221.css",
     "static/js/main.51dd25d1.js"
   ]
 }
