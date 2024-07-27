@@ -1,75 +1,79 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import HeroSection from "./HeroSection";
 import ArticleList from "./ArticleList";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
+import Pagination from "./Pagination"; // Impor Pagination
+import api from "../helpers/api";
+import Layout from "../components/Layout";
+import { useLoading } from "../contex/LoadingContext.js";
+import useDocument from "../helpers/useDocument.js";
 
 const Landing = () => {
   const [articles, setArticles] = useState([]);
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
   const [source, setSource] = useState("");
-  const [loadingLoadMore, setLoadingLoadMore] = useState(false);
+  const [sites, setSites] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { showLoading, hideLoading } = useLoading();
+  useDocument("Home - MultiNews");
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setSearch(params.get("search") || "");
-    setSource(params.get("source") || "all");
-    setLimit(10); // Reset limit when search/source changes
+    setSource(params.get("source") || "");
+    setCurrentPage(parseInt(params.get("page")) || 1);
 
     const fetchArticles = async () => {
-      const res = await axios.get(
-        `https://api.spaceflightnewsapi.net/v4/articles?limit=${limit}&search=${search}&news_site=${source}`
+      showLoading(true);
+      const offset = currentPage * limit - limit;
+      const res = await api.get(
+        `/articles?limit=${limit}&search=${search}&news_site=${source}&offset=${offset}`
       );
+      const res2 = await api.get(`/info`);
+      setSites(res2.data.news_sites);
       setArticles(res.data.results);
+      setTotalPages(Math.ceil(parseInt(res.data.count) / limit) || 1);
+      hideLoading(false);
     };
 
     fetchArticles();
-  }, [location.search, limit]);
-
-  const loadMore = () => {
-    setLimit(limit + 10);
-    setLoadingLoadMore(true);
-    setLoadingLoadMore(false);
-  };
+  }, [location.search, limit, currentPage]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
     if (search) params.set("search", search);
     if (source) params.set("source", source);
+    params.set("page", 1);
 
     navigate(`/?${params.toString()}`);
-    setLimit(10); // Reset limit
+    setLimit(10);
+    setCurrentPage(1);
   };
+  const params = new URLSearchParams(location.search);
 
   return (
-    <>
-      <Navbar />
+    <Layout navLight bgLight>
       <HeroSection
         search={search}
         setSearch={setSearch}
         source={source}
         setSource={setSource}
         handleSearch={handleSearch}
+        searchKey={params.get("search")}
+        sites={sites}
       />
       <ArticleList articles={articles} />
-      <div className="load-more d-flex justify-content-center">
-        <button
-          onClick={loadMore}
-          className={`btn btn-outline-primary rounded my-4 ${
-            loadingLoadMore ? "disabled" : ""
-          }`}
-        >
-          Load More
-        </button>
-      </div>
-      <Footer />
-    </>
+      {totalPages > 0 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      )}
+    </Layout>
   );
 };
 

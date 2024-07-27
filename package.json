@@ -1,5 +1,5 @@
 {
-  "homepage": "https://muhammadnorkholit.github.io/web-kumpulan-berita",
+  "homepage": ".",
   "name": "front",
   "version": "0.1.0",
   "private": true,
@@ -18,10 +18,10 @@
   "scripts": {
     "start": "set PORT=1000 & react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

@@ -6,15 +6,27 @@ const HeroSection = ({
   source,
   setSource,
   handleSearch,
+  searchKey,
+  sites,
 }) => (
   <section className="hero-section flex-column">
     <div className="hero-content container flex-column d-flex justify-content-between align-items-center">
-      <h1 className="text-white fw-bold">Knowledge</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-        exercitationem, earum quis repudiandae odit iure pariatur. Corporis eum
-        porro esse?
-      </p>
+      {!searchKey ? (
+        <>
+          <h1 className="text-white fw-bold">Knowledge</h1>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+            exercitationem, earum quis repudiandae odit iure pariatur. Corporis
+            eum porro esse?
+          </p>
+        </>
+      ) : (
+        <>
+          {" "}
+          <p className="mb-0">Search</p>
+          <h1 className="text-white mb-3 fw-bold">{searchKey}</h1>
+        </>
+      )}
       <form
         onSubmit={handleSearch}
         className="bg-white p-2 hero-search d-flex gap-2 rounded flex-md-nowrap flex-wrap"
@@ -23,8 +35,9 @@ const HeroSection = ({
           <i className="fa fa-search"></i>
           <input
             value={search}
-            onChange={(e) => setSearch(e.target.value.trim())}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
+            inputMode="search"
             placeholder="Explore News"
             className="rounded-0 form-control border-0 shadow-none"
           />
@@ -38,8 +51,11 @@ const HeroSection = ({
             name="source"
             className="form-control border-0 shadow-none"
           >
-            <option value="all">All</option>
-            <option value="cnn">CNN INDONESIA</option>
+            <option value="">All</option>
+            {sites.map((site) => {
+              return <option value={site}>{site}</option>;
+            })}
+
             <option value="bss">BSS</option>
           </select>
         </div>

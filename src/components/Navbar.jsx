@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Navbar = ({ onToggle }) => {
+const Navbar = ({ navLight = false }) => {
   useEffect(() => {
     const navbar = document.querySelector(".navbar");
     const navbarBtn = document.querySelector(".navbar-toggler");
@@ -30,7 +30,11 @@ const Navbar = ({ onToggle }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg top-0 left-0 position-fixed w-100 bg-transparent">
+    <nav
+      className={`navbar navbar-expand-lg top-0 left-0 position-fixed w-100  ${
+        !navLight ? "bg-primary" : "bg-transparent"
+      }`}
+    >
       <div className="container">
         <a className="navbar-brand text-white" href="/">
           Logo
