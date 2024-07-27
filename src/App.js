@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Landing />} />
-          <Route path="/test" exact element={<Test />} />
+          <Route path="/test/:id" exact element={<Test />} />
           <Route path="/article/:slug" exact element={<Detail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
