@@ -9,7 +9,6 @@ import { LoadingProvider } from "./contex/LoadingContext.js";
 function App() {
   return (
     <LoadingProvider>
-      {/* <BrowserRouter> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Landing />} />
