@@ -1,4 +1,3 @@
-import { Axios } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../helpers/api";
@@ -17,6 +16,8 @@ export default function Detail() {
       setArticle(res.data);
       hideLoading();
     };
+    document.title = `${article.title} - MultiNews`;
+
     fetchArticle();
   }, []);
   const date = article.published_at
@@ -27,11 +28,7 @@ export default function Detail() {
     month: "long",
     day: "numeric",
   });
-  useEffect(() => {
-    if (article.title) {
-      document.title = `${article.title} - MultiNews`;
-    }
-  }, [article]);
+
   return (
     <Layout>
       <div className="pt-5 mt-5">
@@ -43,12 +40,6 @@ export default function Detail() {
                 {" "}
                 {article.news_site} on {formattedDate}{" "}
               </span>
-              {/* <span>
-                <i className="fa fa-globe"></i> Source : {article.news_site}
-              </span>
-              <span>
-                <i className="fa-regular fa-clock"></i> Date : {formattedDate}
-              </span> */}
             </div>
             <figure>
               <img
