@@ -10,7 +10,6 @@ import Test from "./Test.jsx";
 function App() {
   return (
     <LoadingProvider>
-      {/* <BrowserRouter> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Landing />} />
