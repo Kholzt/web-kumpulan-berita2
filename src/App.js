@@ -5,6 +5,7 @@ import "./css/index.css";
 import NotFound from "./errors/NotFound";
 import Detail from "./news/detail/Detail";
 import { LoadingProvider } from "./contex/LoadingContext.js";
+import Test from "./Test.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Landing />} />
+          <Route path="/test" exact element={<Test />} />
           <Route path="/article/:slug" exact element={<Detail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
