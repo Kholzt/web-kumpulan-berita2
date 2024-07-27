@@ -10,7 +10,7 @@ function App() {
   return (
     <LoadingProvider>
       {/* <BrowserRouter> */}
-      <BrowserRouter basename="/web-kumpulan-berita2">
+      <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Landing />} />
           <Route path="/article/:slug" exact element={<Detail />} />
