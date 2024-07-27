@@ -14,9 +14,9 @@ export default function Detail() {
       showLoading();
       const res = await api.get(`/articles/${slug}`);
       setArticle(res.data);
+      document.title = `${res.data.title} - MultiNews`;
       hideLoading();
     };
-    document.title = `${article.title} - MultiNews`;
 
     fetchArticle();
   }, []);
